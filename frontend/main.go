@@ -5,6 +5,7 @@ import (
 
 	"Platform/backend/config"
 	"Platform/backend/models"
+	"Platform/backend/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -33,6 +34,8 @@ func main() {
 	router.LoadHTMLGlob("templates/*.html")
 	// Serve static files
 	router.Static("/static", "./frontend/static")
+
+	routes.SetupRoutes(router)
 
 	// Define routes
 	router.GET("/register", func(c *gin.Context) {
