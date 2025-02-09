@@ -13,6 +13,7 @@ RUN go mod download
 
 # Copy the entire backend folder
 COPY backend /app/backend
+COPY frontend /app/frontend
 
 # Copy frontend main.go (as it acts as an entry point)
 COPY frontend/main.go /app/main.go

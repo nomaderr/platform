@@ -30,6 +30,7 @@ func main() {
 		"frontend/templates/index.html",
 	)
 
+	router.LoadHTMLGlob("templates/*.html")
 	// Serve static files
 	router.Static("/static", "./frontend/static")
 
