@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: platform_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      # Переменные окружения, которые ваш Go-код (config.go) ожидает
+      APP_PORT: 8080
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: db:3306
+      DB_NAME: sto_platform
+      # Stripe ключ (тестовый):
+      STRIPE_SECRET_KEY: sk_test_yourKey123
+    networks:
+      vpcbr:
+        ipv4_address: 172.12.0.4
+    restart: always
+
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sto_platform
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      vpcbr:
+        ipv4_address: 172.12.0.5
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+volumes:
+  db_data:
+
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.12.0.0/16

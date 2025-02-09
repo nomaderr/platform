@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container-box {
+            max-width: 600px;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+        }
+        .input-field {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            background-color: #f9fafb;
+        }
+        .input-field:focus {
+            border-color: black;
+        }
+        .save-btn {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .save-btn:hover {
+            background-color: #333;
+        }
+        .menu-item {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .menu-item:hover, .menu-item.active {
+            background-color: #e5e7eb;
+        }
+        .toggle-password {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex">
+
+    <!-- Sidebar Menu -->
+    <aside class="w-64 bg-white shadow-md min-h-screen">
+        <div class="py-6 px-4 text-center border-b">
+            <h2 class="text-xl font-bold text-gray-800">Autoservice App</h2>
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li class="menu-item px-4 py-2 flex items-center">
+                    📅 <a href="/appointments" class="ml-3 text-gray-700 font-medium">My Appointments</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center active">
+                    ℹ️ <a href="/information" class="ml-3 text-gray-700 font-medium">My Information</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center">
+                    🔍 <a href="/find-sto" class="ml-3 text-gray-700 font-medium">Find a Car Service</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center">
+                    ⭐ <a href="/reviews" class="ml-3 text-gray-700 font-medium">Reviews</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 flex flex-col items-center justify-center">
+        
+        <!-- Top Container - User Information -->
+        <div class="container-box mb-6 w-full">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" placeholder="Name" class="input-field" required>
+                <input type="text" placeholder="Surname" class="input-field" required>
+                <input type="email" placeholder="Email" class="input-field" required>
+                <input id="phone" type="tel" class="input-field w-full" required placeholder="Enter phone number">
+            </div>
+            <div class="mt-4 text-left">
+                <button class="save-btn">Save</button>
+            </div>
+        </div>
+        
+        <!-- Middle Container - Car Model -->
+        <div class="container-box mb-6 w-full">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Car Information</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" placeholder="Car Model" class="input-field" required>
+                <input type="text" placeholder="Year" class="input-field" required>
+            </div>
+            <div class="mt-4 text-left">
+                <button class="save-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- Bottom Container - Change Password -->
+        <div class="container-box w-full">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Change Password</h3>
+            <p class="text-gray-600 text-sm mb-2">To change your password, enter your current password.</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="relative col-span-2">
+                    <input type="password" id="current-password" placeholder="Current Password" class="input-field pr-10" required>
+                    <span class="toggle-password text-gray-600" onclick="togglePassword('current-password')">👁</span>
+                </div>
+                <div class="relative col-span-2">
+                    <input type="password" id="new-password" placeholder="New Password" class="input-field pr-10" required>
+                    <span class="toggle-password text-gray-600" onclick="togglePassword('new-password')">👁</span>
+                </div>
+            </div>
+            <div class="mt-4 text-left">
+                <button class="save-btn">Save</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        // Initialize phone input with country flags
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            preferredCountries: ["fr", "gb", "de", "us", "ru"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+
+        // Password Toggle Visibility
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+
+</body>
+</html>

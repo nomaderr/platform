@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarMate - Find Your Service</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .menu-item {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #f3f4f6;
+        }
+
+        .header-shadow {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Header Section -->
+    <header class="fixed w-full bg-white header-shadow z-50">
+        <nav class="border-gray-200 py-3">
+            <div class="flex flex-wrap items-center justify-between max-w-7xl px-6 mx-auto">
+                <!-- Logo -->
+                <a href="#" class="flex items-center">
+                    <img src="static/logo.png" class="h-8 mr-3" alt="CarMate Logo" />
+                    <span class="self-center text-2xl font-semibold text-gray-800">CarMate</span>
+                </a>
+
+                <!-- Navigation Links -->
+                <div class="hidden lg:flex items-center space-x-6">
+                    <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Car Service Stations</a>
+                    <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Mechanics</a>
+                    <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">About Us</a>
+                    <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Contact</a>
+                </div>
+
+                <!-- Buttons -->
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="/business-registration" class="bg-white text-gray-800 border border-gray-300 px-5 py-2.5 rounded-lg font-medium transition hover:bg-gray-100">Add Your Business</a>
+                    <a href="/auth" class="bg-black text-white px-5 py-2.5 rounded-lg font-medium transition hover:bg-gray-900">Authorization</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button data-collapse-toggle="mobile-menu" type="button" class="lg:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-lg focus:ring-2 focus:ring-gray-200">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div class="hidden lg:hidden w-full bg-white border-t p-4" id="mobile-menu">
+            <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Car Service Stations</a>
+            <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Mechanics</a>
+            <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">About Us</a>
+            <a href="#" class="block py-2 text-gray-700 font-medium hover:text-black">Contact</a>
+            <div class="mt-4 border-t pt-4">
+                <a href="/business-registration" class="block py-2 bg-white text-gray-800 border border-gray-300 text-center rounded-lg font-medium hover:bg-gray-100">Add Your Business</a>
+                <a href="/auth" class="block py-2 bg-black text-white text-center rounded-lg font-medium hover:bg-gray-900">Authorization</a>
+            </div>
+        </div>
+    </header>
+
+</body>
+
+<section class="relative w-full h-screen bg-cover bg-center" style="background-image: url('/static/main.jpg');">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+    <!-- Search Filter Container -->
+    <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        <h1 class="text-white text-4xl sm:text-5xl font-extrabold mb-6">
+            Find the Best Car Service Near You
+        </h1>
+        <p class="text-gray-300 text-lg sm:text-xl mb-8">
+            Search for the nearest auto repair services quickly and easily
+        </p>
+
+        <!-- Search Filter -->
+        <div class="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <!-- Service Name Input -->
+            <input type="text" placeholder="What are you looking for?" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
+
+            <!-- Address / City Input -->
+            <input type="text" placeholder="Enter address or city" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
+
+            <!-- Search Button -->
+            <button class="w-full sm:w-auto px-6 py-3 bg-black text-white font-medium rounded-lg hover:bg-gray-900 transition">
+                Search
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<section class="py-12 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gray-800">
+                Explore Our Top-Rated Car Services
+            </h2>
+            <p class="mt-4 text-lg text-gray-600">
+                Discover the best auto repair shops and services near you.
+            </p>
+        </div>
+
+        <!-- First Carousel (AutoPlay) -->
+        <div class="w-full relative">
+            <div class="swiper progress-slide-carousel swiper-container relative">
+                <div class="swiper-wrapper">
+                    <!-- Generate 10 Slides -->
+                    <script>
+                        const servicesAuto = ["FastAuto Repair", "Elite Car Fix", "QuickFix Garage", "Luxury Auto Works", "Speedy Repairs", "Premium AutoCare", "RoadFix Experts", "Urban Auto Hub", "SmartDrive Service", "Mega Motors"];
+                        for (let i = 0; i < servicesAuto.length; i++) {
+                            document.write(`
+                                <div class="swiper-slide">
+                                    <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition">
+                                        <img src="/static/logo.png" class="w-40 h-40 object-cover mx-auto" alt="Service ${i+1}">
+                                        <div class="p-3 text-center">
+                                            <h3 class="text-md font-semibold text-gray-800">${servicesAuto[i]}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t-4 border-gray-400 my-8"></div>
+
+        <!-- Second Carousel (Manual with Adjustable Arrows) -->
+        <div class="relative w-full">
+            <div class="swiper fraction-slide-carousel swiper-container relative">
+                <div class="swiper-wrapper">
+                    <!-- Generate 10 Slides -->
+                    <script>
+                        const servicesManual = ["Garage Experts", "FixIt Fast", "Elite AutoWorks", "Metro AutoCare", "Auto Service Hub", "Green Drive Service", "FastLane Repairs", "City Car Solutions", "Revamp Auto", "AutoCare 24/7"];
+                        for (let i = 0; i < servicesManual.length; i++) {
+                            document.write(`
+                                <div class="swiper-slide">
+                                    <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition">
+                                        <img src="/static/logo.png" class="w-40 h-40 object-cover mx-auto" alt="Service ${i+1}">
+                                        <div class="p-3 text-center">
+                                            <h3 class="text-md font-semibold text-gray-800">${servicesManual[i]}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+                        }
+                    </script>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <div class="absolute inset-0 flex justify-between items-center px-4">
+                    <!-- Left Arrow -->
+                    <button class="swiper-button-prev border border-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 transition arrow-size">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <!-- Right Arrow -->
+                    <button class="swiper-button-next border border-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 transition arrow-size">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="py-12 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-extrabold text-gray-800">
+                Why Partner with Us?
+            </h2>
+            <p class="mt-4 text-lg text-gray-600">
+                Discover the benefits of joining our platform and how we can optimize your business for success.
+            </p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    +25% Customers
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Reach More Customers</h3>
+                <p class="text-gray-600 mb-10">
+                    Expand your client base with our platform by connecting with customers looking for reliable services.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    90% Efficiency
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Streamlined Bookings</h3>
+                <p class="text-gray-600 mb-10">
+                    Our easy-to-use booking system ensures hassle-free appointments for you and your clients.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    +35% Insights
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Real-Time Analytics</h3>
+                <p class="text-gray-600 mb-10">
+                    Track performance and customer insights to optimize your business strategies effectively.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    Top 5% Services
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Enhanced Visibility</h3>
+                <p class="text-gray-600 mb-10">
+                    Get featured on our platform, boosting your online presence and attracting more clients.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    100% Secure
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Secure Payments</h3>
+                <p class="text-gray-600 mb-10">
+                    Offer clients secure and flexible payment options, ensuring trust and convenience for all.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="relative bg-white rounded-lg shadow-md p-8 transform hover:scale-105 hover:shadow-lg transition group">
+                <div class="absolute top-4 right-4 bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    +20% Revenue
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-6">Business Growth Tools</h3>
+                <p class="text-gray-600 mb-10">
+                    Utilize tools to grow your business, from targeted promotions to customer feedback management.
+                </p>
+                <button class="hidden group-hover:block absolute bottom-4 left-4 bg-black text-white px-5 py-2 rounded-lg text-sm font-medium transition">
+                    Add your business
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="relative bg-black mt-12 text-gray-100">
+    <!-- Footer Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Links -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 text-center md:text-left">
+            <div>
+                <h3 class="text-lg font-semibold">Contacts</h3>
+                <p class="mt-2 text-sm">Email: support@carmate.com</p>
+                <p class="mt-1 text-sm">Phone: +1 (800) 123-4567</p>
+                <p class="mt-1 text-sm">Address: 123 Main Street, Anytown, USA</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold">Loyalty Program</h3>
+                <p class="mt-2 text-sm">
+                    Join our loyalty program to earn rewards and discounts for your car services.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold">Confidentiality of Data</h3>
+                <p class="mt-2 text-sm">
+                    Your data is protected with state-of-the-art security measures to ensure your privacy.
+                </p>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-700 my-6"></div>
+
+        <!-- Promotional Offers and Copyright -->
+        <div class="text-center text-sm text-gray-400">
+            <p>Promotional offers are subject to the terms and conditions specified on the car service page.</p>
+            <p class="mt-2">Copyright © 2025 CarMate. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    // AutoPlay Carousel (Top)
+    var autoSwiper = new Swiper(".progress-slide-carousel", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 15,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+    });
+
+    // Manual Carousel (Bottom) with Arrows
+    var manualSwiper = new Swiper(".fraction-slide-carousel", {
+        loop: true,
+        slidesPerView: 3,
+        spaceBetween: 15,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+<!-- Custom CSS -->
+<style>
+    /* Adjust Arrow Size Here */
+    .swiper-button-prev svg,
+    .swiper-button-next svg {
+        height: 20px !important; /* Adjust this value */
+        width: 20px !important; /* Adjust this value */
+    }
+
+    /* Adjust Button Container Size (Optional) */
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 1px; 
+        height: 1px; 
+    }
+</style>
+
+
+
+</html>

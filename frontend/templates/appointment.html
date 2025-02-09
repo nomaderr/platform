@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .menu-item {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background-color: #e5e7eb;
+        }
+
+        .appointment-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .appointment-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .status {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+<div class="min-h-screen flex">
+    
+    <!-- Sidebar Menu -->
+    <aside class="w-64 bg-white shadow-md min-h-screen">
+        <div class="py-6 px-4 text-center border-b">
+            <h2 class="text-xl font-bold text-gray-800">CarMate</h2>
+        </div>
+        <nav class="mt-6">
+            <ul class="space-y-2">
+                <li class="menu-item px-4 py-2 flex items-center active">
+                    📅 <a href="/appointment" class="ml-3 text-gray-700 font-medium">My Appointments</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center">
+                    ℹ️ <a href="/userInfo" class="ml-3 text-gray-700 font-medium">My Information</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center">
+                    🔍 <a href="/find-sto" class="ml-3 text-gray-700 font-medium">Find a Car Service</a>
+                </li>
+                <li class="menu-item px-4 py-2 flex items-center">
+                    ⭐ <a href="/reviews" class="ml-3 text-gray-700 font-medium">Reviews</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <!-- My Appointments Section -->
+        <div id="appointments-section" class="section bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">My Appointments</h3>
+            <div id="appointments-list" class="flex flex-col items-center space-y-6">
+                <!-- Appointments will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    function addAppointment(serviceName, date, status, imageUrl) {
+        const appointmentContainer = document.getElementById("appointments-list");
+        const appointmentCard = document.createElement("div");
+        appointmentCard.className = "appointment-card";
+
+        appointmentCard.innerHTML = `
+            <div class="card sm:max-w-sm mx-auto">
+                <figure>
+                    <img src="${imageUrl}" alt="Service Image" />
+                </figure>
+                <div class="card-body">
+                    <h5 class="card-title mb-2.5">${serviceName}</h5>
+                    <p class="mb-4">Date: ${date}</p>
+                    <p class="status ${status === 'Confirmed' ? 'text-black' : 'text-gray-600'}">Status: ${status}</p>
+                    <div class="card-actions flex justify-center gap-3">
+                        <button class="btn btn-dark">Reschedule</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add new appointments on top
+        appointmentContainer.prepend(appointmentCard);
+    }
+
+    // Example Data (Can be replaced with dynamic data from backend)
+    addAppointment("FastAuto Repair", "February 10, 2025", "Confirmed", "https://cdn.flyonui.com/fy-assets/components/card/image-9.png");
+    addAppointment("QuickFix Garage", "February 15, 2025", "Pending", "https://cdn.flyonui.com/fy-assets/components/card/image-9.png");
+</script>
+</body>
+</html>
